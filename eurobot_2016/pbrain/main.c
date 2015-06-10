@@ -1,6 +1,6 @@
-//#include <FreeRTOS.h>
-//#include <task.h>
 #include <platform.h>
+#include <FreeRTOS.h>
+#include <task.h>
 //#include <ch.h>
 //#include <hal.h>
 //#include <math.h>
@@ -27,9 +27,11 @@ void position_computed_hook(void)
 
 void blink(void)
 {
-  for (;;) {
+  while(1)
+  {
+    platform_led_toggle(PLATFORM_LED0 | PLATFORM_LED1);
 
- //   vTaskDelay(1000 / portTICK_RATE_MS);
+    vTaskDelay(500 / portTICK_RATE_MS);
   }
 }
 
@@ -38,9 +40,9 @@ int main(void)
 {
   platform_init();
 
-  //xTaskCreate(blink, (const signed char *)"blink", 200, NULL, 1, NULL );
+  xTaskCreate(blink, (const signed char *)"blink", 200, NULL, 1, NULL );
 
-  //vTaskStartScheduler();
+  vTaskStartScheduler();
 
   while(1) 
   {
