@@ -1,12 +1,6 @@
 #include <platform.h>
 #include <FreeRTOS.h>
 #include <task.h>
-//#include <ch.h>
-//#include <hal.h>
-//#include <math.h>
-//#include <lcd.h>
-//#include <field.h>
-//#include <dc_motors.h>
 //#include <position.h>
 //#include <asserv.h>
 //#include <pcm9685.h>
@@ -39,6 +33,7 @@ void blink(void)
 int main(void) 
 {
   platform_init();
+  //asserv_init();
 
   xTaskCreate(blink, (const signed char *)"blink", 200, NULL, 1, NULL );
 
@@ -51,12 +46,6 @@ int main(void)
 
   return 0;
   /*
-  //RTOS initialization
-  halInit();
-  chSysInit();
-
-  palSetPad(GPIOG, GPIOG_LED4_RED);
-
   //modules and peripherals initialization
   dcmInit();
   pcm9685Init();
